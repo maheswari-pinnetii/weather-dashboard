@@ -20,7 +20,7 @@ The Weather Dashboard is a production-grade, responsive single-page web applicat
 ├─────────────────┤             ├────────────────────────────────────────┤
 │ Header          │             │ useWeather (state & cancellation)      │
 │ SearchBar       │             │ useRecentSearches (localStorage)       │
-│ SmartStation    │             │ useTheme (dark/light mode DOM sync)    │
+│ WeatherStation  │             │ useTheme (dark/light mode DOM sync)    │
 │ CurrentWeather  │             │ useGeolocation (GPS & reverse geocode) │
 │ Forecast (7-Day)│             └──────────────────┬─────────────────────┘
 │ ForecastCard    │                                │
@@ -89,7 +89,7 @@ The Weather Dashboard is a production-grade, responsive single-page web applicat
    - Rounded search capsule with embedded `Use My Location` pill.
    - Square blue submit button.
    - Client-side validation feedback.
-3. **`SmartStation`**:
+3. **`WeatherStation`**:
    - High-density smart-living meteorological station view.
    - Dynamic city synchronization: updates clock, local date, sunrise/sunset, and climate sensors for any searched city.
    - Multi-room sensor telemetry: Office Indoor Sensor (temp, humidity, CO₂), Living Room Sensor (differential tracking), Outdoor Sensor.

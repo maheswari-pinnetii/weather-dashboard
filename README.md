@@ -7,7 +7,7 @@
 [![Vitest](https://img.shields.io/badge/Vitest-5.0.5-green.svg?logo=vitest)](https://vitest.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-A modern, high-density Weather Station and meteorological dashboard engineered with **React 19**, **TypeScript 5.9**, **Vite 6**, **Tailwind CSS v4**, and the **OpenWeather API**. Atmospheric conditions and human comfort recommendations are uniquely visualized through **human-figure visual icons** (e.g., person with an umbrella for rain, person with sunglasses and summer brim hat for sunny days, person bundled in a puffer coat and scarf for sub-zero snow).
+A modern, high-density Weather Station and meteorological dashboard engineered with **React 19**, **TypeScript 5.9**, **Vite 6**, **Tailwind CSS v4**, **OpenWeather API**, and **Unsplash API**. Atmospheric conditions and human comfort recommendations are uniquely visualized through **human-figure visual icons** (e.g., person with an umbrella for rain, person with sunglasses and summer brim hat for sunny days, person bundled in a puffer coat and scarf for sub-zero snow).
 
 ---
 
@@ -55,8 +55,9 @@ Weather Dashboard follows enterprise frontend engineering standards, providing t
 
 ## 🌟 Key Application Features
 
-### 1. Dynamic Weather Station (`SmartStation`)
+### 1. Dynamic Weather Station (`WeatherStation`)
 - **Real-Time Location Synchronization**: Searching any location immediately adjusts the digital station clock, destination calendar date, astronomical sunrise/sunset times, and multi-sensor readings to the destination's exact timezone offset (`current.timezoneOffset`).
+- **Live Destination Photography (Unsplash Integration)**: Automatically queries high-resolution panoramic photography for any searched city to showcase real-world views in the Weather Station showcase window.
 - **Microclimate Climate Sensors**:
   - *Station Office Sensor*: Indoor temperature, relative humidity, and real-time CO₂ status indicators.
   - *Living Room Sensor*: Microclimate tracking with 24-hour differential trend indicators.
@@ -149,7 +150,7 @@ weather-dashboard/
 │   │   ├── ForecastCard.tsx         # Individual daily forecast card
 │   │   ├── Header.tsx               # Branding logo, unit toggle & dark mode switch
 │   │   ├── SearchBar.tsx            # City input form & geolocation button
-│   │   ├── SmartStation.tsx         # Weather Station, real-time landscapes, calendar
+│   │   ├── WeatherStation.tsx       # Weather Station, real-time landscapes, calendar
 │   │   ├── WeatherDetails.tsx       # Supplementary meteorological cards
 │   │   └── WeatherIcon.tsx          # Human-figure visual weather icons
 │   ├── hooks/                       # Custom state and persistence hooks
@@ -160,6 +161,7 @@ weather-dashboard/
 │   ├── services/                    # API communication layer
 │   │   ├── apiClient.ts             # Typed HTTP client & error handler
 │   │   ├── mockWeatherData.ts       # Deterministic zero-config offline weather engine
+│   │   ├── unsplashService.ts       # Unsplash location photography fetcher
 │   │   └── weatherService.ts        # Geocoding & weather query coordinator
 │   ├── types/                       # TypeScript interfaces
 │   │   └── weather.ts               # API models and application domain types
@@ -197,17 +199,19 @@ npm install
 ```
 
 ### 3. API Key Setup
-1. Register for a free OpenWeather API key at [openweathermap.org/api](https://openweathermap.org/api).
-2. Copy `.env.example` to `.env`:
+1. Register for an OpenWeather API key at [openweathermap.org/api](https://openweathermap.org/api).
+2. *(Optional)* Register for an Unsplash Access Key at [unsplash.com/developers](https://unsplash.com/developers).
+3. Copy `.env.example` to `.env`:
    ```bash
    cp .env.example .env
    ```
-3. Open `.env` and paste your key:
+4. Configure `.env` with your API keys:
    ```env
-   VITE_OPENWEATHER_API_KEY=your_actual_api_key_here
+   VITE_OPENWEATHER_API_KEY=your_openweather_api_key
+   VITE_UNSPLASH_ACCESS_KEY=your_unsplash_access_key
    ```
 
-> **Zero-Config Offline Support**: If an API key is not supplied, the application automatically activates its deterministic mock engine, enabling complete exploration of all features, cities, landscapes, and calendar tools offline.
+> **Zero-Config Offline Support**: If an API key is not supplied, the application automatically activates its deterministic fallback engine, enabling complete exploration of all features, cities, landscapes, and calendar tools offline.
 
 ### 4. Running the Development Server
 ```bash
@@ -240,12 +244,13 @@ The compiled, optimized production bundle will be generated in `dist/`.
 
 ## 📡 API Endpoints Used
 
-| Endpoint | Method | Purpose |
-|---|---|---|
-| `https://api.openweathermap.org/geo/1.0/direct` | `GET` | Resolves city names to latitude and longitude coordinates |
-| `https://api.openweathermap.org/geo/1.0/reverse` | `GET` | Resolves GPS coordinates to readable city names |
-| `https://api.openweathermap.org/data/2.5/weather` | `GET` | Fetches real-time current weather conditions |
-| `https://api.openweathermap.org/data/2.5/forecast` | `GET` | Fetches 5-day forecast data in 3-hour intervals |
+| Service | Endpoint | Method | Purpose |
+|---|---|---|---|
+| **OpenWeather** | `https://api.openweathermap.org/data/2.5/weather?q={CITY_NAME}&units=metric` | `GET` | Fetches real-time current weather conditions directly by city |
+| **OpenWeather** | `https://api.openweathermap.org/data/2.5/forecast?lat={LAT}&lon={LON}&units=metric` | `GET` | Fetches 5-day forecast data in 3-hour intervals |
+| **OpenWeather** | `https://api.openweathermap.org/geo/1.0/direct?q={CITY_NAME}&limit=1` | `GET` | Direct geocoding city search |
+| **OpenWeather** | `https://api.openweathermap.org/geo/1.0/reverse?lat={LAT}&lon={LON}&limit=1` | `GET` | Reverse geocoding for GPS coordinates |
+| **Unsplash** | `https://api.unsplash.com/search/photos?query={LOCATION}&per_page=1` | `GET` | Fetches high-definition location photography |
 
 ---
 

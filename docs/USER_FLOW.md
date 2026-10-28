@@ -165,5 +165,5 @@ Weather Dashboard is structured to serve two distinct user behaviors:
            │     • Controls dashboard ambient display luminance for bedside/desk use
            │
            └──> View Mode Toggle:
-                 • Smart Station Living Mode vs Standard 2-Column Mode
+                 • Weather Station Living Mode vs Standard 2-Column Mode
 ```

@@ -19,7 +19,7 @@ src/
 │   ├── ForecastCard.tsx         # Individual forecast day tile
 │   ├── Header.tsx               # App bar, theme/unit/viewMode toggles
 │   ├── SearchBar.tsx            # City search input & geolocation button
-│   ├── SmartStation.tsx         # Alpine smart-living station, real-time landscapes, calendar
+│   ├── WeatherStation.tsx       # Alpine smart-living station, real-time landscapes, calendar
 │   ├── WeatherDetails.tsx       # Supplementary meteorological cards
 │   └── WeatherIcon.tsx          # Dynamic human vector weather icon renderer
 ├── hooks/
@@ -49,8 +49,8 @@ src/
 - [x] Build `useWeather.ts` hook featuring `AbortController` request cancellation to prevent race conditions during rapid typing.
 - [x] Implement `mockWeatherData.ts` for offline development and zero-config demonstration.
 
-### Milestone 2: Human-Centered Design & Smart Station Experience
-- [x] Construct `SmartStation.tsx` alpine smart-living interface.
+### Milestone 2: Human-Centered Design & Weather Station Experience
+- [x] Construct `WeatherStation.tsx` alpine smart-living interface.
 - [x] Implement multi-sensor microclimate cards (Station Office, Living Room, Outdoor Garden).
 - [x] Build Rain Radar preview modal with dynamic precipitation map and webcam city skyline panorama.
 - [x] Add interactive Recent Searches chip list with horizontal scroll buttons.
@@ -62,7 +62,7 @@ src/
 - [x] Generate direct Google Calendar intent URLs pre-populated with weather details for every forecast day.
 
 ### Milestone 4: Procedural Real-Time Nature Landscape Engine
-- [x] Develop `generateLocationNatureLandscape()` in `SmartStation.tsx`.
+- [x] Develop `generateLocationNatureLandscape()` in `WeatherStation.tsx`.
 - [x] Implement solar hour calculations from `current.timezoneOffset` to drive daylight, twilight sunset, and starlit night skies.
 - [x] Implement climate condition branches (Rain, Snow, Cloud, Storm, Mist, Sunlit Alpine).
 - [x] Add `useEffect` to auto-reset to landscape index `0` whenever a new city is searched.

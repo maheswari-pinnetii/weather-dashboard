@@ -28,7 +28,7 @@ Traditional weather widgets are either cluttered with intrusive ads, lack weekly
 ## 3. Core Feature Requirements
 
 ### 3.1 Dual Viewing Modes
-- **Weather Station Mode (`SmartStation`)**:
+- **Weather Station Mode (`WeatherStation`)**:
   - High-density smart-living dashboard inspired by modern climate stations.
   - Live digital clock and calendar date dynamically synchronized to the searched city's exact timezone offset (`current.timezoneOffset`).
   - Multi-sensor monitoring grid:
@@ -136,7 +136,7 @@ Traditional weather widgets are either cluttered with intrusive ads, lack weekly
        ┌──────────────────────────┴──────────────────────────┐
        ▼                                                     ▼
 ┌──────────────────────────┐                    ┌──────────────────────────┐
-│   SmartStation Display   │                    │  Forecast 7-Day Grid     │
+│  WeatherStation Display  │                    │  Forecast 7-Day Grid     │
 │  - Timezone-synced clock │                    │  - Monday to Sunday      │
 │  - Station sensors       │                    │  - Interactive preview   │
 │  - Calendar sync (.ics)  │                    │  - Reset to today ↺      │
